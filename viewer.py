@@ -70,7 +70,7 @@ def main(sensor):
     series_invalidas = {}
     # dias = [str(2017) + "-" + str(d) for d in range(150,366)]
     # dias += [str(y) + "-" + str(d) for y in range(2018,2020) for d in range(1,366)]
-    dias = [str(y) + "-" + str(d) for y in range(2013,2020) for d in range(1,366)]
+    dias = [str(y) + "-" + str(d) for y in range(2013,2020) for d in range(150,366)]
     i = 0
     for d in dias:
 
@@ -81,7 +81,7 @@ def main(sensor):
         path_g_invalida = make_path("ghi", sensor, False, d)
 
         if os.path.isfile(path_d_valida):
-            continue
+            #continue
             message = []
             y_d = []
             y_g = []
@@ -95,6 +95,7 @@ def main(sensor):
                 y_d.append(get_points(make_path("dni",SENSORS[i],valida_d[i],d)))
                 y_g.append(get_points(make_path("ghi",SENSORS[i],valida_g[i],d)))
         elif os.path.isfile(path_d_invalida):
+            continue
             message = []
             y_d = []
             y_g = []
@@ -115,10 +116,13 @@ def main(sensor):
                 'weight' : 'normal',
                 'size'   : 10}
         matplotlib.rc('font', **font)
-        x = [i for i in range(0,144)]
+        x = [i/6 for i in range(0,144)]
         #fig, (ax1, ax2, ax3) = plt.subplots(1,3,sharey=True )
-        fig, ax = plt.subplots(1,3,sharey=True,figsize=(14,5))
+        fig, ax = plt.subplots(1,3,sharey=True,figsize=(10,4))
+
         #ax1 = fig.add_subplot()
+
+        ax[0].set_ylabel("Irradiancia (W/m²)")
 
         for i in range(3):
 
@@ -128,10 +132,12 @@ def main(sensor):
                 ax[i].title.set_color('r')
             ax[i].title.set_text(d + " " + message[i] + " " + SENSORS[i])
             ax[i].set_ylim([0, 1200])
+            ax[i].set_xlim([0,24])
+            ax[i].set_xlabel("Hora")
             ax[i].plot(x, y_d[i], label = "directa", linewidth=2,color="tab:orange", zorder=3)
             ax[i].scatter(x, y_d[i], s=10, color="tab:orange", zorder=2)
-            ax[i].plot(x, y_g[i], label = "global", linewidth=2, color="tab:blue", zorder=1)
-            ax[i].scatter(x, y_g[i], s=10, color="tab:blue", zorder=0)
+            # ax[i].plot(x, y_g[i], label = "global", linewidth=2, color="tab:blue", zorder=1)
+            # ax[i].scatter(x, y_g[i], s=10, color="tab:blue", zorder=0)
             ax[i].grid()
             ax[i].legend(loc="best")
 
