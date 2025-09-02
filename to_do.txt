@@ -1,1 +1,0 @@
-Arreglar division by 0 en test loop

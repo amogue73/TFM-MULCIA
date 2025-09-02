@@ -3,6 +3,11 @@ Máster Universitario en Lógica, Computación e Inteligencia Artificial
 
 Universidad de Sevilla
 
-Autor: Alejandro Moreno Guerrero
+Author: Alejandro Moreno Guerrero
 
-En este repositorio se subirán los archivos del proyecto.
+This repository contains files from this project
+
+Code from the following sources has been used and modified for this project:
+
+https://github.com/lucidrains/vit-pytorch/blob/main/vit_pytorch/vit.py
+https://github.com/huggingface/transformers/tree/main/src/transformers/models/patchtst
